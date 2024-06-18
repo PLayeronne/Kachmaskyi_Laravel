@@ -2,25 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-
-
-class DatabaseSeeder extends Seeder
+class BlogCategoriesTableSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {
-
-        // User::factory(10)->create();
-        $this->call(UsersTableSeeder::class);
-        $this->call(BlogCategoriesTableSeeder::class);
-        \App\Models\BlogPost::factory(100)->create();
         $categories = [];
 
         $cName = 'Без категорії';
@@ -42,13 +34,5 @@ class DatabaseSeeder extends Seeder
         }
 
         DB::table('blog_categories')->insert($categories);
-
-
-
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
     }
 }
