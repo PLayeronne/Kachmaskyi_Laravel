@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DiggingDeeperController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestTestController;
 
@@ -19,6 +20,13 @@ $groupData = [
     'namespace' => 'App\Http\Controllers\Blog\Admin',
     'prefix' => 'admin/blog',
 ];
+Route::group(['prefix' => 'digging_deeper'], function () {
+
+    Route::get('collections', [DiggingDeeperController::class, 'collections'])
+
+        ->name('digging_deeper.collections');
+
+});
 Route::group($groupData, function () {
     //BlogCategory
     $methods = ['index','edit','store','update','create',];
@@ -29,4 +37,11 @@ Route::group($groupData, function () {
     Route::resource('posts', PostController::class)
         ->except(['show'])                               //не робити маршрут для метода show
         ->names('blog.admin.posts');
+    Route::group(['prefix' => 'digging_deeper'], function () {
+
+        Route::get('collections', [DiggingDeeperController::class, 'collections'])
+
+            ->name('digging_deeper.collections');
+
+    });
 });
